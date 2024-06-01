@@ -6,15 +6,15 @@ from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 from comfy.cli_args import args
 
-from ..client_s3 import get_s3_instance
-S3_INSTANCE = get_s3_instance()
+from ..client_blob import get_blob_instance
+S3_INSTANCE = get_blob_instance()
 
 
-class SaveImageS3:
+class SaveImageBlob:
     def __init__(self):
         base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
         self.temp_dir = os.path.join(base_dir, "temp/")
-        self.s3_output_dir = os.getenv("S3_OUTPUT_DIR")
+        self.s3_output_dir = os.getenv("BLOB_OUTPUT_DIR")
         self.type = "output"
         self.prefix_append = ""
         self.compress_level = 4
@@ -31,7 +31,7 @@ class SaveImageS3:
     RETURN_TYPES = ()
     FUNCTION = "save_images"
     OUTPUT_NODE = True
-    CATEGORY = "ComfyS3"
+    CATEGORY = "ComfyUI-Azure-Blob-Storage"
 
     def save_images(self, images, filename_prefix="ComfyUI", prompt=None, extra_pnginfo=None):
         filename_prefix += self.prefix_append

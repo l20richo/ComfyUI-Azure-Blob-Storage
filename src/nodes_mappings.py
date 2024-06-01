@@ -1,22 +1,22 @@
-from .nodes.load_image_s3 import LoadImageS3
-from .nodes.save_image_s3 import SaveImageS3
-from .nodes.save_video_files_s3 import SaveVideoFilesS3
-from .nodes.download_file_s3 import DownloadFileS3
-from .nodes.upload_file_s3 import UploadFileS3
+from .nodes.load_image_blob import LoadImageBlob
+from .nodes.save_image_blob import SaveImageBlob
+from .nodes.save_video_files_blob import SaveVideoFilesBlob
+from .nodes.download_file_blob import DownloadFileBlob
+from .nodes.upload_file_blob import UploadFileBlob
 
 
 NODE_CLASS_MAPPINGS = {
-    "LoadImageS3": LoadImageS3,
-    "SaveImageS3": SaveImageS3,
-    "SaveVideoFilesS3": SaveVideoFilesS3,
-    "DownloadFileS3": DownloadFileS3,
-    "UploadFileS3": UploadFileS3
+    "LoadImageBLOB": LoadImageBlob,
+    "SaveImageBLOB": SaveImageBlob,
+    "SaveVideoFilesBLOB": SaveVideoFilesBlob,
+    "DownloadFileBLOB": DownloadFileBlob,
+    "UploadFileBLOB": UploadFileBlob
 }
 
 NODE_DISPLAY_NAME_MAPPINGS = {
-    "LoadImageS3": "Load Image from S3",
-    "SaveImageS3": "Save Image to S3",
-    "SaveVideoFilesS3": "Save Video Files to S3",
-    "DownloadFileS3": "Download File from S3",
-    "UploadFileS3": "Upload File to S3"
+    "LoadImageBLOB": "Load Image from ",
+    "SaveImageBLOB": "Save Image to BLOB",
+    "SaveVideoFilesBLOB": "Save Video Files to BLOB",
+    "DownloadFileBLOB": "Download File from BLOB",
+    "UploadFileBLOB": "Upload File to BLOB"
 }

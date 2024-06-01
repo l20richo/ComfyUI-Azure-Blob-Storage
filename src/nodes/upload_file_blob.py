@@ -1,13 +1,13 @@
 from ..client_blob import get_blob_instance
 BLOB_INSTANCE = get_blob_instance()
 
-class UploadFileS3:
+class UploadFileBlob:
     @classmethod
     def INPUT_TYPES(s):
         return {
             "required":{
                 "local_path": ("STRING", {"default": "input/example.png"}),
-                "s3_path": ("STRING", {"default": "output/example.png"}),
+                "blob_path": ("STRING", {"default": "output/example.png"}),
             }
         }
 

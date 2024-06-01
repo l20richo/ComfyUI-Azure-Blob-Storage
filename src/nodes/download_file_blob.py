@@ -1,5 +1,5 @@
-from ..client_blob import get_s3_instance
-S3_INSTANCE = get_blob_instance()
+from ..client_blob import get_blob_instance
+BLOB_INSTANCE = get_blob_instance()
 
 
 class DownloadFileBlob:
@@ -19,7 +19,7 @@ class DownloadFileBlob:
     RETURN_NAMES = ("local_path",)
     FUNCTION = "download_file_blob"
     
-    def download_file_s3(self, s3_path, local_path):
-        local_path = S3_INSTANCE.download_file(s3_path=s3_path, local_path=local_path)
+    def download_file_s3(self, blob_path, local_path):
+        local_path = BLOB_INSTANCE.download_file(s3_path=blob_path, local_path=local_path)
         print(f"Downloaded file from Blob Storage to {local_path}")
         return local_path

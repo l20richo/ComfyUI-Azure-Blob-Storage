@@ -22,8 +22,8 @@ class Blob:
         self.container_name = container_name
         self.blob_service_client = self.get_client()
 
-        self.input_dir = os.getenv("S3_INPUT_DIR")
-        self.output_dir = os.getenv("S3_OUTPUT_DIR")
+        self.input_dir = os.getenv("BLOB_INPUT_DIR")
+        self.output_dir = os.getenv("BLOB_OUTPUT_DIR")
         if not self.does_folder_exist(self.input_dir):
             self.create_folder(self.output_dir)
         if not self.does_folder_exist(self.output_dir):
@@ -69,7 +69,7 @@ class Blob:
             response =  container_client.list_blobs(name_starts_with=folder_name+"/")
             return any(obj.key.startswith(folder_name) for obj in response)
         except Exception as e:
-            err = f"Failed to check if folder exists in S3: {e}"
+            err = f"Failed to check if folder exists in Blob: {e}"
             logger.error(err)
     
     def create_folder(self, folder_name):
@@ -81,7 +81,7 @@ class Blob:
             blob_client.upload_blob(b"", overwrite=True)
 
         except Exception as e:
-            err = f"Failed to create folder in S3: {e}"
+            err = f"Failed to create folder in Blob: {e}"
             logger.error(err)
     
     def download_file(self, blob_path, local_path):

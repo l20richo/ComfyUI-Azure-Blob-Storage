@@ -22,7 +22,7 @@ class ColoredFormatter(logging.Formatter):
 
 
 # Create a new logger
-logger = logging.getLogger("ComfyS3")
+logger = logging.getLogger("ComfyUI-Azure-Blob-Storage")
 logger.propagate = False
 
 # Add handler if we don't have one.
