@@ -7,7 +7,7 @@ from ..client_blob import get_blob_instance
 BLOB_INSTANCE = get_blob_instance()
 
 
-class LoadImageS3:
+class LoadImageBlob:
     @classmethod
     def INPUT_TYPES(s):
         input_dir = os.getenv("BLOB_INPUT_DIR")
