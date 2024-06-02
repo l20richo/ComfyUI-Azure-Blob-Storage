@@ -25,9 +25,9 @@ class LoadImageBlob:
     
     def load_image(self, image):
         if os.getenv("BLOB_INPUT_DIR").endswith('/'):
-            blob_path = os.getenv("BLOB_INPUT_DIR") + image
-        else:
             blob_path = os.getenv("BLOB_INPUT_DIR")[:-1] + image
+        else:
+            blob_path = os.getenv("BLOB_INPUT_DIR") + image
 
         #blob_path = os.path.join(os.getenv("BLOB_INPUT_DIR"), image)
         image_path = BLOB_INSTANCE.download_file(blob_path=blob_path, local_path=f"input{image}")
