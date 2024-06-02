@@ -11,12 +11,6 @@ load_dotenv()
 class Blob:
     def __init__(self, storage_account_name, connection_string, container_name):
         
-        #self.region = region
-        #self.access_key = access_key
-        #self.secret_key = secret_key
-        #self.bucket_name = bucket_name
-        #self.s3_client = self.get_client()
-
         self.storage_account_name = storage_account_name
         self.connection_string = connection_string
         self.container_name = container_name
@@ -35,12 +29,7 @@ class Blob:
             logger.error(err)
     
         try:
-            # s3 = boto3.resource(
-            #     service_name='s3',
-            #     region_name=self.region,
-            #     aws_access_key_id=self.access_key,
-            #     aws_secret_access_key=self.secret_key
-            # )
+           
             blob_service_client = BlobServiceClient.from_connection_string(self.connection_string)
             return blob_service_client
         except Exception as e:
@@ -50,9 +39,6 @@ class Blob:
     def get_files(self, prefix):
         if self.does_folder_exist(prefix):
             try:
-                # bucket = self.s3_client.Bucket(self.bucket_name)
-                # files = [obj.key for obj in bucket.objects.filter(Prefix=prefix)]
-                # files = [f.replace(prefix, "") for f in files]
                 container_client = self.blob_service_client.get_container_client(self.container_name)
                 blobs = container_client.list_blobs(name_starts_with=prefix)
                 files = [blob.name.replace(prefix, "") for blob in blobs]
@@ -67,15 +53,15 @@ class Blob:
         try:
             container_client = self.blob_service_client.get_container_client(self.container_name)
             response =  container_client.list_blobs(name_starts_with=folder_name+"/")
-            return any(obj.key.startswith(folder_name) for obj in response)
+            for obj in response:
+                return True
+            return False
         except Exception as e:
             err = f"Failed to check if folder exists in Blob: {e}"
             logger.error(err)
     
     def create_folder(self, folder_name):
         try:
-            # bucket = self.s3_client.Bucket(self.bucket_name)
-            # bucket.put_object(Key=f"{folder_name}/")
             container_client = self.blob_service_client.get_container_client(self.container_name)
             blob_client = container_client.get_blob_client(f"{folder_name}/")
             blob_client.upload_blob(b"", overwrite=True)
@@ -94,9 +80,6 @@ class Blob:
 
             with open(local_path, "wb") as download_file:
                 download_file.write(blob_client.download_blob().readall())
-
-            # bucket = self.s3_client.Bucket(self.bucket_name)
-            # bucket.download_file(s3_path, local_path)
             return local_path
         except NoCredentialsError:
             err = "Credentials not available or not valid."
@@ -107,8 +90,6 @@ class Blob:
 
     def upload_file(self, local_path, blob_path):
         try:
-            # bucket = self.s3_client.Bucket(self.bucket_name)
-            # bucket.upload_file(local_path, blob_path)
             blob_client = self.blob_service_client.get_blob_client(blob_path)
             with open(local_path, "rb") as data:
                 blob_client.upload_blob(data, overwrite=True)
@@ -169,11 +150,6 @@ def get_blob_instance():
             container_name=os.getenv("AZURE_STORAGE_CONTAINER_NAME")
         )
 
-        #     region=os.getenv("S3_REGION"),
-        #     access_key=os.getenv("S3_ACCESS_KEY"),
-        #     secret_key=os.getenv("S3_SECRET_KEY"),
-        #     bucket_name=os.getenv("S3_BUCKET_NAME")
-        # )
         return blob_instance
     except Exception as e:
         err = f"Failed to create Azure Blob instance: {e} Please check your environment variables."
