@@ -76,7 +76,7 @@ class Blob:
             os.makedirs(local_dir)
         try:
             
-            blob_client = self.blob_service_client.get_blob_client(f"{blob_path}/")
+            blob_client = self.blob_service_client.get_blob_client(container= self.container_name, blob = blob_path)
 
             with open(local_path, "wb") as download_file:
                 download_file.write(blob_client.download_blob().readall())
@@ -90,7 +90,7 @@ class Blob:
 
     def upload_file(self, local_path, blob_path):
         try:
-            blob_client = self.blob_service_client.get_blob_client(blob_path)
+            blob_client = self.blob_service_client.get_blob_client(container= self.container_name, blob = blob_path)
             with open(local_path, "rb") as data:
                 blob_client.upload_blob(data, overwrite=True)
 
