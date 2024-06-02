@@ -90,7 +90,7 @@ class Blob:
             os.makedirs(local_dir)
         try:
             
-            blob_client = self.container_client.get_blob_client(f"{blob_path}/")
+            blob_client = self.blob_service_client.get_blob_client(f"{blob_path}/")
 
             with open(local_path, "wb") as download_file:
                 download_file.write(blob_client.download_blob().readall())
@@ -109,7 +109,7 @@ class Blob:
         try:
             # bucket = self.s3_client.Bucket(self.bucket_name)
             # bucket.upload_file(local_path, blob_path)
-            blob_client = self.container_client.get_blob_client(blob_path)
+            blob_client = self.blob_service_client.get_blob_client(blob_path)
             with open(local_path, "rb") as data:
                 blob_client.upload_blob(data, overwrite=True)
 

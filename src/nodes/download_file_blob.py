@@ -19,7 +19,7 @@ class DownloadFileBlob:
     RETURN_NAMES = ("local_path",)
     FUNCTION = "download_file_blob"
     
-    def download_file_s3(self, blob_path, local_path):
-        local_path = BLOB_INSTANCE.download_file(s3_path=blob_path, local_path=local_path)
+    def download_file_blob(self, blob_path, local_path):
+        local_path = BLOB_INSTANCE.download_file(blob_path=blob_path, local_path=local_path)
         print(f"Downloaded file from Blob Storage to {local_path}")
         return local_path
