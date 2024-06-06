@@ -31,7 +31,7 @@ ComfyUI nodes to:
 - [x] standalone download/upload file from/to Azure Blob Storage buckets
 - [x] load/save image from/to Amazon Azure Blob Storage buckets
 - [x] save VHS (VideoHelperSuite) video files to Azure Blob Storage buckets
-- [x] install ComfyS3 from [ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manager)
+- [x] install ComfyUI-Azure-Blob-Storage from [ComfyUI-Manager](https://github.com/ltdrdata/ComfyUI-Manager)
 - [ ] load checkpoints from Azure Blob Storage buckets
 - [ ] load video from Azure Blob Storage buckets
 ## Credits
