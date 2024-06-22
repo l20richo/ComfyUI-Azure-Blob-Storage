@@ -1,0 +1,15 @@
+[project]
+name = "comfyui-azure-blob-storage"
+description = "ComfyUI-Azure-Blob-Storage seamlessly integrates with [a/Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/) in ComfyUI. This open-source project provides custom nodes for effortless loading and saving of images, videos, and checkpoint models directly from Azure blob containers within the ComfyUI graph interface."
+version = "1.0.0"
+license = "LICENSE"
+dependencies = ["python-dotenv==1.0.1", "boto3==1.34.32", "azure-storage-blob==12.20.0"]
+
+[project.urls]
+Repository = "https://github.com/l20richo/ComfyUI-Azure-Blob-Storage"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "ComfyUI-Azure-Blob-Storage"
+Icon = ""
