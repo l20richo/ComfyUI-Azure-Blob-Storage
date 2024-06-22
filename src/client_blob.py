@@ -1,12 +1,9 @@
 import os
-import boto3
 from .logger import logger
-from botocore.exceptions import NoCredentialsError
+from azure.core.exceptions import ResourceNotFoundError
 from azure.storage.blob import BlobServiceClient
-
 from dotenv import load_dotenv
 load_dotenv()
-
 
 class Blob:
     def __init__(self, storage_account_name, connection_string, container_name):
@@ -81,7 +78,7 @@ class Blob:
             with open(local_path, "wb") as download_file:
                 download_file.write(blob_client.download_blob().readall())
             return local_path
-        except NoCredentialsError:
+        except ResourceNotFoundError:
             err = "Credentials not available or not valid."
             logger.error(err)
         except Exception as e:
@@ -95,7 +92,7 @@ class Blob:
                 blob_client.upload_blob(data, overwrite=True)
 
             return blob_path
-        except NoCredentialsError:
+        except ResourceNotFoundError:
             err = "Credentials not available or not valid."
             logger.error(err)
         except Exception as e:
